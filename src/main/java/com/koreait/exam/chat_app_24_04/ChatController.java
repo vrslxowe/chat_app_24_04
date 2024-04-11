@@ -3,15 +3,33 @@ package com.koreait.exam.chat_app_24_04;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/chat")
 public class ChatController {
-    ChatMessage message = new ChatMessage("오시온","안녕하세요");
+    private List<ChatMessage> chatMessages = new ArrayList<>();
+
+    public record writeMessageResponse(long id) {
+
+    }
 
     @PostMapping("/writeMessage")
     @ResponseBody
-    public RsData<ChatMessage> writeMessage() {
-        return new RsData<>("S-1","메시지가 작성됨",message);
+    public RsData<writeMessageResponse> writeMessage() {
+
+        ChatMessage message = new ChatMessage("오시온","안녕하세요");
+
+        chatMessages.add(message);
+
+        return new RsData(
+                "S-1",
+                "메세지가 작성됨",
+                new writeMessageResponse(message.getId()
+                )
+        );
     }
+
 
 }
