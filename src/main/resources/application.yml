@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8000
 spring:
   thymeleaf:
     cache: false
@@ -12,3 +12,7 @@ spring:
 logging:
   level:
     com.koreait.exam.chat_app_24_04: debug
+custom:
+  jpa:
+    open-in-view:
+      exclude-patterns: /article/detail, /article/detail2
